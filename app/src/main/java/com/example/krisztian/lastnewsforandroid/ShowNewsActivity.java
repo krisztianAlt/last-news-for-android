@@ -36,12 +36,11 @@ public class ShowNewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_news);
 
-        // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         countryName = intent.getExtras().getString("COUNTRY_NAME");
 
         newsList = new ArrayList<>();
-        newsListView = (ListView) findViewById(R.id.newsList);
+        newsListView = findViewById(R.id.newsList);
 
         new GetNews().execute();
     }
@@ -58,7 +57,8 @@ public class ShowNewsActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-            // Making a request to url and getting response
+
+            // request to url and getting response
             String url = "https://newsapi.org/v2/everything?q=" +
                     countryName +
                     "&sources=reuters&sortBy=relevancy&apiKey=" +
@@ -70,10 +70,8 @@ public class ShowNewsActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
-                    // Getting JSON Array node
                     JSONArray news = jsonObj.getJSONArray("articles");
 
-                    // looping through All Contacts
                     for (int i = 0; i < news.length(); i++) {
                         JSONObject n = news.getJSONObject(i);
                         String title = n.getString("title");
@@ -82,17 +80,14 @@ public class ShowNewsActivity extends AppCompatActivity {
                         String date = n.getString("publishedAt").substring(0, 10);
                         String urlToImage = n.getString("urlToImage");
 
-                        // tmp hash map for single contact
                         HashMap<String, String> newsMap = new HashMap<>();
 
-                        // adding each child node to HashMap key => value
                         newsMap.put("title", title);
                         newsMap.put("author", author);
                         newsMap.put("newsUrl", newsUrl);
                         newsMap.put("date", date);
                         newsMap.put("urlToImage", urlToImage);
 
-                        // adding contact to contact list
                         newsList.add(newsMap);
                     }
                 } catch (final JSONException e) {
@@ -148,13 +143,4 @@ public class ShowNewsActivity extends AppCompatActivity {
         }
 
     }
-
-    /*public void openURL(View view){
-        TextView textView = (TextView)view;
-        String url = textView.getText().toString();
-        Intent i = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse(url));
-        startActivity(i);
-    }*/
-
 }
