@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class ShowNewsActivity extends AppCompatActivity {
@@ -125,6 +126,10 @@ public class ShowNewsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Void result) {
             super.onPostExecute(result);
+
+            // sort news by date
+            Collections.sort(newsList, new MapComparator("date"));
+
             final ListAdapter adapter = new SimpleAdapter(ShowNewsActivity.this, newsList,
                     R.layout.news_list_item, new String[]{ "title","author", "date", "newsUrl", "urlToImage"},
                     new int[]{R.id.newsTitle, R.id.author, R.id.date, R.id.newsUrl, R.id.urlToImage});
