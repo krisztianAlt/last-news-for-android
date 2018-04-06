@@ -5,9 +5,20 @@
     android:layout_height="match_parent"
     tools:context="com.example.krisztian.lastnewsforandroid.ShowNewsActivity">
 
+    <TextView
+        android:id="@+id/intro"
+        android:layout_width="323dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Please, click an article in the list, then it will be opened in browser."  />
+
     <ListView
         android:id="@+id/newsList"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intro" />
 
 </RelativeLayout>

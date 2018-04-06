@@ -1,12 +1,15 @@
 package com.example.krisztian.lastnewsforandroid;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
         final CountryList adapter = new
                 CountryList(MainActivity.this, countryNames, imageId);
 
-        /*final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, countryNames);*/
-
         countryListView.setAdapter(adapter);
 
         countryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -55,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        TextView newsApiLink = findViewById(R.id.poweredBy);
+        String sourceString = "Powered by <strong><u>News API</u></strong>";
+        newsApiLink.setText(Html.fromHtml(sourceString));
+        newsApiLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("https://newsapi.org/"));
+                startActivity(i);
+            }
+        });
+
     }
 
 }
