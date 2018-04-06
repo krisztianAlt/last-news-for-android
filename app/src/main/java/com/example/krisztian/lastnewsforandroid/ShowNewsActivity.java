@@ -78,7 +78,6 @@ public class ShowNewsActivity extends AppCompatActivity {
                         String author = n.getString("author");
                         String newsUrl = n.getString("url");
                         String date = n.getString("publishedAt").substring(0, 10);
-                        String urlToImage = n.getString("urlToImage");
 
                         HashMap<String, String> newsMap = new HashMap<>();
 
@@ -86,7 +85,6 @@ public class ShowNewsActivity extends AppCompatActivity {
                         newsMap.put("author", author);
                         newsMap.put("newsUrl", newsUrl);
                         newsMap.put("date", date);
-                        newsMap.put("urlToImage", urlToImage);
 
                         newsList.add(newsMap);
                     }
@@ -126,8 +124,8 @@ public class ShowNewsActivity extends AppCompatActivity {
             Collections.sort(newsList, new MapComparator("date"));
 
             final ListAdapter adapter = new SimpleAdapter(ShowNewsActivity.this, newsList,
-                    R.layout.news_list_item, new String[]{ "title","author", "date", "newsUrl", "urlToImage"},
-                    new int[]{R.id.newsTitle, R.id.author, R.id.date, R.id.newsUrl, R.id.urlToImage});
+                    R.layout.news_list_item, new String[]{ "title","author", "date", "newsUrl"},
+                    new int[]{R.id.newsTitle, R.id.author, R.id.date, R.id.newsUrl});
             newsListView.setAdapter(adapter);
 
             newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
